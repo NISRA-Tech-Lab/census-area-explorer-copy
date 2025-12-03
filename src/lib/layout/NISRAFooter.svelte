@@ -73,22 +73,22 @@
             <ul class="list-inline">
               <li class="list-inline-item">
                 <a href="https://www.facebook.com/nisra.gov.uk">
-                  <img src="img/logo/facebook-brands-solid-full.svg" class="img-50"/>
+                  <img src="img/logo/facebook-brands-solid-full.svg" title="Facebook" role="img" class="img-50"/>
                 </a>
               </li>
               <li class="list-inline-item">
                 <a href="https://x.com/NISRA/">
-                  <img src="img/logo/x-twitter-brands-solid-full.svg" class="img-50"/>
+                  <img src="img/logo/x-twitter-brands-solid-full.svg" title="Twitter/X" role="img" class="img-50"/>
                 </a>
               </li>
               <li class="list-inline-item">
                 <a href="https://www.youtube.com/user/nisrastats">
-                  <img src="img/logo/youtube-brands-solid-full.svg" class="img-50"/>
+                  <img src="img/logo/youtube-brands-solid-full.svg" title="YouTube" role="img" class="img-50"/>
                 </a>
               </li>
               <li class="list-inline-item">
                 <a href="https://www.linkedin.com/company/northern-ireland-statistics-and-research-agency/">
-                  <img src="img/logo/linkedin-in-brands-solid-full.svg" class="img-50"/>
+                  <img src="img/logo/linkedin-in-brands-solid-full.svg" title="LinkedIn" role="img" class="img-50"/>
                 </a>
               </li>
             </ul>
