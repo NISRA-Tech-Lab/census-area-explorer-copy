@@ -47,69 +47,116 @@
   </div>
 </Section>
   
-<footer style="color: #ffffff; background-color: #00205b;">
-	<div class="col-wide" data-analytics="footer">
-		<div class="row">
-			<div class="column left">
-				<h3>Links</h3><br>
-				<ul>
-					<li><a href="https://build.nisra.gov.uk/en/" class="link" style="color: #ffffff">Census 2021 Flexible Table Builder</a></li><br>
-					<li><a href="https://data.nisra.gov.uk/" class="link" style="color: #ffffff">NISRA Data Portal</a></li><br/>
-					<li><a href="https://www.opendatani.gov.uk/" class="link" style="color: #ffffff">OpenDataNI</a></li><br/>
-					<li><a href="https://www.nidirect.gov.uk" class="link" style="color: #ffffff">NIDirect</a></li><br>
-					<li><a href="https://www.gov.uk/" class="link" style="color: #ffffff">GOV.UK</a></li><br>
-				</ul>
-			</div>	
-			<div class="column right">
-				<h3>Follow NISRA</h3><br>
-				<ul> 
-					<li><a href="https://www.facebook.com/nisra.gov.uk" class="link" style="color: #ffffff">Facebook</a></li><br>
-					<li><a href="https://twitter.com/NISRA" class="link" style="color: #ffffff">Twitter</a></li><br>
-					<li><a href="https://www.youtube.com/user/nisrastats" class="link" style="color: #ffffff">YouTube</a></li><br>
-				</ul>
-			</div>
-		</div>
-		<br>
-		<div class="flex-list">
-			<ul>
-				<li>&copy Crown Copyright</li>
-				<li><a href="https://www.nisra.gov.uk/contact" class="link" style="color: #ffffff">Contact us</a></li>
-				<li><a href="https://www.nisra.gov.uk/terms-and-conditions" class="link" style="color: #ffffff">Terms and conditions</a></li>
-				<li><a href="https://www.nisra.gov.uk/cookies" class="link" style="color: #ffffff">Cookies</a></li>
-				<li><a href="https://www.nisra.gov.uk/nisra-privacy-notice" class="link" style="color: #ffffff">Privacy</a></li>
-				<li><a href="https://www.nisra.gov.uk/accessibility-statement-nisra" class="link" style="color: #ffffff">Accessibility Statement</a></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+    <footer class="footer mt-auto py-4 bg-nisra text-white">
+
+      <div class="container">
+        <!-- 3 column section -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <h5>Data Tools</h5>
+            <ul class="list-unstyled">
+              <li><a href="https://explore.nisra.gov.uk/local-stats/">Local Statistics Explorer</a></li>
+              <li><a href="https://data.nisra.gov.uk">Data Portal</a></li>
+              <li><a href="https://build.nisra.gov.uk/en/">Census Flexible Table Builder</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Corporate</h5>
+            <ul class="list-unstyled">
+              <li><a href="https://www.nisra.gov.uk/">NISRA Website</a></li>
+              <li><a href="https://www.nisra.gov.uk/statistics/about-nisra/careers">Careers</a></li>
+              <li><a href="https://www.nisra.gov.uk/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Follow</h5>
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/nisra.gov.uk">
+                  <img src="img/logo/facebook-brands-solid-full.svg" class="img-50"/>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://x.com/NISRA/">
+                  <img src="img/logo/x-twitter-brands-solid-full.svg" class="img-50"/>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.youtube.com/user/nisrastats">
+                  <img src="img/logo/youtube-brands-solid-full.svg" class="img-50"/>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/company/northern-ireland-statistics-and-research-agency/">
+                  <img src="img/logo/linkedin-in-brands-solid-full.svg" class="img-50"/>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Horizontal list with separators -->
+        <ul class="list-inline footer-links text-center mb-0">
+          <li class="list-inline-item"><a href="https://www.nisra.gov.uk/crown-copyright">© Crown Copyright</a></li>
+          <li class="list-inline-item">|</li>
+          <li class="list-inline-item"><a href="https://www.nisra.gov.uk/terms-and-conditions">Terms and conditions</a></li>
+          <li class="list-inline-item">|</li>
+          <li class="list-inline-item"><a href="https://www.nisra.gov.uk/cookies">Cookies</a></li>
+          <li class="list-inline-item">|</li>
+          <li class="list-inline-item"><a href="https://www.nisra.gov.uk/nisra-privacy-notice">Privacy</a></li>
+          <li class="list-inline-item">|</li>
+          <li class="list-inline-item"><a href="https://www.nisra.gov.uk/accessibility-statement-nisra">Accessibility Statement</a></li>
+        </ul>
+      </div>
+      
+    </footer>
 
 <style>
-	footer {
-		padding-bottom: 5px;
-		font-size: 18px;
-	}
-	footer a.link {
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-		text-decoration: none;
-		display: inline-block;
-	}
-	footer a.link:hover {
-		text-decoration: underline;
-	}
-	footer a.link:active {
-		outline: 3px solid transparent;
-		background-color: #fd0;
-		-webkit-box-shadow: 0 -2px #fd0, 0 4px #222;
-		box-shadow: 0 -2px #fd0, 0 4px #222;
-		color: #222;
-		text-decoration: none;
-	}
+.app-title { font-weight: 700; letter-spacing: 0.2px; }
+.img-50 { width: 50px; height: 50px; }
+
+/* ===========================
+   Footer
+   =========================== */
+.footer {
+  background-color: #00205b;
+  color: #fff;
+  border-top: 4px solid #3878c5;
+  margin-top: 20px !important;
+  border-bottom: 15px solid #00205b;
+}
+.footer a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer a:hover,
+.footer a:focus {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.footer-links { list-style: none; padding-left: 0; }
+.footer-links .list-inline-item { margin: 0 .5rem; }
+
+/* More vertical spacing in vertical lists */
+.footer ul.list-unstyled li { margin-bottom: 0.5rem; }
+
+/* Social icon hover */
+.footer .list-inline-item img {
+  transition: box-shadow 0.2s ease, border 0.2s ease;
+}
+.footer .list-inline-item img:hover {
+  border: 2px solid #fff;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+}
  	ul {
 		padding: 0;
 		margin: 0;
 	}
-	li {
+/*	li {
 		margin-right: 18px;
 		display: inline-block;
 	}
