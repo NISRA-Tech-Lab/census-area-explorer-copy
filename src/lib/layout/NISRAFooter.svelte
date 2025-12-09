@@ -53,7 +53,7 @@
 
       <!-- Data Tools Column -->
       <div class="footer-col">
-        <h3 style="color: #fff; font-size: 16px; font-weight: bold; margin-top: 0;">Data Tools</h3>
+        <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-top: 0;">Data Tools</h3>
         <ul class="footer-list">
           <li><a href="https://explore.nisra.gov.uk/local-stats/">Local Statistics Explorer</a></li>
           <li><a href="https://data.nisra.gov.uk">Data Portal</a></li>
@@ -63,7 +63,7 @@
 
       <!-- Corporate Column -->
       <div class="footer-col">
-        <h3 style="color: #fff; font-size: 16px; font-weight: bold; margin-top: 0;">Corporate</h3>
+        <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-top: 0;">Corporate</h3>
         <ul class="footer-list">
           <li><a href="https://www.nisra.gov.uk/">NISRA Website</a></li>
           <li><a href="https://www.nisra.gov.uk/statistics/about-nisra/careers">Careers</a></li>
@@ -73,7 +73,7 @@
 
       <!-- Follow NISRA Column -->
       <div class="footer-col">
-        <h3 style="color: #fff; font-size: 16px; font-weight: bold; margin-top: 0;">Follow NISRA</h3>
+        <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-top: 0;">Follow NISRA</h3>
         <ul class="footer-social">
           <li>
             <a href="https://www.facebook.com/nisra.gov.uk">
@@ -124,7 +124,7 @@
    Footer Wrapper
    =========================== */
 .nisra-footer {
-  background-color: #002147;
+  background-color: #00205B;
   color: #fff;
   border-top: 4px solid #3878c5;
   padding: 2rem 0 2.5rem; /* extra bottom padding for Back to top bar */
@@ -146,14 +146,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;   /* 🔹 keep the whole group centered */
-  gap: 2rem 4rem;            /* row-gap | column-gap */
+  gap: 2rem 11rem;            /* row-gap | column-gap */
   margin-bottom: 2rem;
 }
 
 /* Columns: centred, fixed-ish width so spacing is consistent */
 .footer-col {
   flex: 0 1 50px;           /* max ~260px wide, can shrink if needed */
-  min-width: 220px;          /* but don't get too tiny */
+  min-width: 250px;          /* but don't get too tiny */
 }
 
 /* Phones — stack vertically */
@@ -178,8 +178,8 @@
    =========================== */
 .footer-col h3 {
   margin: 0 0 1rem 0;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: normal;
   color: #fff;
 }
 
@@ -193,11 +193,11 @@
 }
 
 .footer-list li {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.75rem 0;
 }
 
 .footer-list a {
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -212,8 +212,8 @@
 }
 
 .footer-social img {
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   transition: box-shadow 0.2s ease, border 0.2s ease;
 }
@@ -233,7 +233,7 @@
   align-items: center;
   flex-wrap: nowrap;       /* one line on larger screens */
   gap: 0.75rem;
-  font-size: 12px;
+  font-size: 18px;
   margin: 1.5rem 0 0;
   padding: 0;
 }
@@ -244,7 +244,7 @@
 
 .footer-links a {
   color: #fff;
-  font-size: 12px;
+  font-size: 18px;
   text-decoration: underline;
 }
 
