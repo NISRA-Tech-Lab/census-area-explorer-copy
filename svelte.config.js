@@ -16,10 +16,9 @@ const config = {
 				entries: []
 		},
 		paths: {
-				assets: production ? 'https://explore.nisra.gov.uk/area-explorer-2021' : '',
-				base: production ? '/area-explorer-2021' : ''
-		},
-		trailingSlash: 'always'
+			base: production ? '/area-explorer-2021' : '',
+			relative: false
+		}
 	}
 };
 

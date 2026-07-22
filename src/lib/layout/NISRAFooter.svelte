@@ -1,8 +1,8 @@
 <script>
- // import { assets } from "$app/paths";
+  import { asset } from '$app/paths';
 	import { getContext } from 'svelte';
-	import Section from "$lib/layout/Section.svelte";
-
+  import Section from "$lib/layout/Section.svelte";
+  import { base } from '$app/paths';
 
 //	export let theme = getContext('theme');
 </script>
@@ -77,22 +77,27 @@
         <ul class="footer-social">
           <li>
             <a href="https://www.facebook.com/nisra.gov.uk">
-              <img src="img/logo/facebook-brands-solid-full.svg" title="Facebook" role="img" class="img" />
+              <img
+                src={asset('/img/logo/facebook-brands-solid-full.svg')}
+                title="Facebook"
+                role="img"
+                class="img"
+              />
             </a>
           </li>
           <li>
             <a href="https://x.com/NISRA/">
-              <img src="img/logo/x-twitter-brands-solid-full.svg" title="Twitter/X" role="img" class="img" />
+              <img src={asset('/img/logo/x-twitter-brands-solid-full.svg')} title="Twitter/X" role="img" class="img" />
             </a>
           </li>
           <li>
             <a href="https://www.youtube.com/user/nisrastats">
-              <img src="img/logo/youtube-brands-solid-full.svg" title="YouTube" role="img" class="img" />
+              <img src={asset('/img/logo/youtube-brands-solid-full.svg')} title="YouTube" role="img" class="img" />
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/company/northern-ireland-statistics-and-research-agency/">
-              <img src="img/logo/linkedin-in-brands-solid-full.svg" title="LinkedIn" role="img" class="img" />
+              <img src={asset('/img/logo/linkedin-in-brands-solid-full.svg')} title="LinkedIn" role="img" class="img" />
             </a>
           </li>
         </ul>
