@@ -1,50 +1,16 @@
-<script context="module">
-	export const prerender = true;
-	// getData is a function in utils.js that goes to a url input and looks for a return of csv data
-	import { getData, adjectify } from "$lib/utils";
-	// a constant with 3 string app_inputs, search_data - the places.csv, app_json_data - json files for each area code (accessed via app_inputs.app_json_data),
-	// quantiles - not sure but not used in index currently
-	import { app_inputs } from "$lib/config";
-
-	// create a reference to the json for the current area to be loaded - called in the load() func below
-	async function loadArea(code, fetch) {
-		let res = await fetch(app_inputs.app_json_data + code + ".json");
-		let json = await res.json();
-		
-		return json;
-	}
-
-	export async function load({ params, fetch }) {
-		let code = params.code;
-
-		let res = await getData(app_inputs.search_data, fetch);
-
-		let lookup = {};
-		res.forEach((d) => (lookup[d.code] = d.name));
-		res.forEach((d) => {
-			d.typepl = geog_types[d.type].pl;
-			d.typenm = geog_types[d.type].name;
-			//		  d.typestr = lookup[d.parent] ? `${lookup[d.parent]} includes ${types[d.type].name} within ${lookup[d.parent]}` : '';
-			d.typestr = lookup[d.parent]
-				? `${geog_types[d.type].name} within ${lookup[d.parent]}`
-				: "";
-		});
-
-		let search_data = res.sort((a, b) => a.name.localeCompare(b.name));
-		let ni = await loadArea("N92000002", fetch);
-		let place = await loadArea(code, fetch);
-
-		return {
-			props: { search_data, place, ni },
-		};
-	}
-</script>
-
 <script>
 	import { base } from "$app/paths";
 	import { goto } from "$app/navigation";
 	import { suffixer, changeClass, changeStr } from "$lib/utils";
-	import { geog_types, topics, mapStyle, mapSources, mapLayers, mapPaint} from "$lib/config";
+	import {
+        app_inputs,
+        geog_types,
+        topics,
+        mapStyle,
+        mapSources,
+        mapLayers,
+        mapPaint
+	} from "$lib/config";
 	import Section from "$lib/layout/Section.svelte";
 	import Em from "$lib/ui/Em.svelte";
 	import Select from "$lib/ui/Select.svelte";
@@ -60,7 +26,9 @@
 	import AnalyticsBanner from "$lib/layout/AnalyticsBanner.svelte";
 	import ScrollToTop from '$lib/ui/scroll.svelte';
 
-	export let search_data, place, ni;
+	export let data;
+
+	$: ({ search_data, place, ni } = data);
 
 	let w, cols;
 	let map = null;
@@ -253,9 +221,8 @@
 		? "NI 2021"
 		: null;
 	
-	$: topics_available = place.type != "ni" && place.type != "lgd"
-		? false
-		: true;	
+	$: topics_available =
+        place && (place.type === "ni" || place.type === "lgd");
 	
 	$: chart_compare_type = comp_none
 		? null
@@ -276,16 +243,25 @@
 </script>
 
 <svelte:head>
-	<title>{place.name} Census Data</title>
-	<meta name="description" content="" />
-	<meta property="og:title" content="{place.name} Census Data" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="{app_inputs.base}/{place.code}/" />
-	<meta
-		property="og:description"
-		content="Explore census data for {place.name}."
-	/>
-	<meta name="description" content="Explore census data for {place.name}." />
+        <title>{place ? `${place.name} Census Data` : "Census Data"}</title>
+        <meta name="description" content="" />
+        <meta
+                property="og:title"
+                content={place ? `${place.name} Census Data` : "Census Data"}
+        />
+        <meta property="og:type" content="website" />
+        <meta
+                property="og:url"
+                content={place ? `${app_inputs.base}/${place.code}/` : app_inputs.base}
+        />
+        <meta
+                property="og:description"
+                content={place ? `Explore census data for ${place.name}.` : "Explore census data."}
+        />
+        <meta
+                name="description"
+                content={place ? `Explore census data for ${place.name}.` : "Explore census data."}
+        />
 </svelte:head>
 <ScrollToTop />
 <Section column="wide">
@@ -295,11 +271,11 @@
 		<div class="grid mtl">
 			<div>
 				<span class="text-small">
-					<a href="{base}/" sveltekit:noscroll>Home</a
+					<a href="{base}/" data-sveltekit-noscroll>Home</a
 					>{@html " &gt; "}
 					{#if place.parents[0]}
 						{#each [...place.parents].reverse() as parent, i}
-							<a href="{base}/{parent.code}/" sveltekit:noscroll
+							<a href="{base}/{parent.code}/" data-sveltekit-noscroll
 								>{parent.name}</a
 							>{@html " &gt; "}
 						{/each}
@@ -317,18 +293,22 @@
 					<button
 						class="btn"
 						class:btn-active={!comp_2011}
-						on:click={() => (comp_none = true)}
-						on:click={() => (comp_2011 = false)}
-						on:click={() => (comp_ni = false)}
+						onclick={() => {
+							comp_none = true;
+							comp_2011 = false;
+							comp_ni = false;
+						}}
 						>No comparison</button
 					>
 					{:else}
 					<button
 						class="btn"
 						class:btn-active={comp_none}
-						on:click={() => (comp_none = true)}
-						on:click={() => (comp_2011 = false)}
-						on:click={() => (comp_ni = false)}
+						onclick={() => {
+							comp_none = true;
+							comp_2011 = false;
+							comp_ni = false;
+						}}
 						>No comparison</button
 					>
 					{/if}
@@ -338,9 +318,11 @@
 							class:btn-active={comp_ni &
 								!comp_none &
 								!comp_2011}
-							on:click={() => (comp_ni = true)}
-							on:click={() => (comp_none = false)}
-							on:click={() => (comp_2011 = false)}
+							onclick={() => {
+								comp_none = true;
+								comp_2011 = false;
+								comp_ni = false;
+							}}
 							>NI 2021</button>
 					{/if}
 					
@@ -348,17 +330,21 @@
 						<button
 						class="btn"
 						class:btn-active={comp_2011 & !comp_none & !comp_ni}
-						on:click={() => (comp_2011 = true)}
-						on:click={() => (comp_none = false)}
-						on:click={() => (comp_ni = false)}
+						onclick={() => {
+							comp_none = true;
+							comp_2011 = false;
+							comp_ni = false;
+						}}
 						>Same area 2011</button>
 						{:else}
 						<button
 						class="btn"
 						class:btn-active={comp_2011 & !comp_none & !comp_ni}
-						on:click={() => (comp_2011 = false)}
-						on:click={() => (comp_none = true)}
-						on:click={() => (comp_ni = false)}
+						onclick={() => {
+							comp_none = true;
+							comp_2011 = false;
+							comp_ni = false;
+						}}
 						>2011 data not available</button>
 						{/if}
 						
@@ -431,13 +417,13 @@
 							class="btn"
 							style="width: 33%"
 							title="Click to print this page to pdf or printer"
-							onclick="window.print();return false;"
+							onclick={() => window.print()}
 							>Print / PDF </button>
 						<button
 							class="btn"
 							style="width: 33%"
 							alt="Return to the landing page"
-							onclick="window.location.href='{base}';"
+							onclick={() => (window.location.href = base)}
 							>Menu </button>
 						<button
 							class="btn"
@@ -783,7 +769,7 @@
 				<span class="text-bold">Parents of {place.name} </span><br/>
 				<span class="text-small">
 				{#each [...place.parents].reverse() as parent, i}
-				<span style="display: block; margin-left: {i > 0 ? (i - 1) * 15 : 0}px">{@html i > 0 ? '↳ ' : ''}<a href="{base}/{parent.code}" sveltekit:noscroll>{parent.name}</a></span>
+				<span style="display: block; margin-left: {i > 0 ? (i - 1) * 15 : 0}px">{@html i > 0 ? '↳ ' : ''}<a href="{base}/{parent.code}" data-sveltekit-noscroll>{parent.name}</a></span>
 				{/each}
 			</span>
 			{:else}
@@ -795,7 +781,7 @@
 				<span class="text-bold">{place.children[0] ? geog_types[place.children[0].type].pl : 'Areas'} within {place.name}</span><br/>
 				<span class="text-small">
 				{#each place.children as child, i}
-				<a href="{base}/{child.code}" sveltekit:noscroll>{child.name}</a>{ i < place.children.length - 1 ? ', ' : ''}
+				<a href="{base}/{child.code}" data-sveltekit-noscroll>{child.name}</a>{ i < place.children.length - 1 ? ', ' : ''}
 				{/each}
 			</span>
 			{:else}
@@ -886,6 +872,7 @@
 							<span class="text-big" style="font-size: 2.8em;"
 							>{ place.hectares >= 0.1? ( place.hectares).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 								: "<0.1"} ha
+							</span>
 
 						</div>
 						<div class="div-grey-box">

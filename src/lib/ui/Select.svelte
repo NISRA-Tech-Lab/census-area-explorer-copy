@@ -99,17 +99,17 @@
 	}
 </script>
 
-<svelte:window on:click={onClick}/>
+<svelte:window onclick={onClick} />
 
-<div id="select" class:active={expanded} on:keydown={doKeydown}>
+<div id="select" class:active={expanded} onkeydown={doKeydown}>
 	{#if selectedItem && !search}
-	<a id="toggle" class="selected" on:click={toggle}>
+	<a id="toggle" class="selected" onclick={toggle}>
 		<span class="selection">{selectedItem[label]} {#if group}<small>{selectedItem[group]}</small>{/if}</span>
-		<span class="button close" on:click={unSelect}>&nbsp;</span>
+		<span class="button close" onclick={unSelect}>&nbsp;</span>
 	</a>
 	{:else}
-	<a id="toggle" on:click={toggle} on:focus={toggle}>
-		<input on:keydown={typing} type="text" placeholder={placeholder} bind:value={filter} autocomplete="false" bind:this={input} on:keyup={doKeyup} autofocus="autofocus" onfocus="this.select()" />
+	<a id="toggle" onclick={toggle} onfocus={toggle}>
+		<input onkeydown={typing} type="text" placeholder={placeholder} bind:value={filter} autocomplete="false" bind:this={input} onkeyup={doKeyup} autofocus="autofocus" onfocus={(event) => event.currentTarget.select()} />
 		<span class="button" class:search class:down={!search}>&nbsp;</span>
 	</a>
 	{/if}
@@ -120,13 +120,13 @@
 			<li>Type a name...</li>
 			{:else if filtered[0] && group}
 			{#each filtered as option, i}
-			<li class:highlight="{active == i}" on:click="{() => select(option)}" on:mouseover="{() => active = i}" bind:this="{items[i]}">
+			<li class:highlight="{active == i}" onclick={() => select(option)} onmouseover={() => active = i} bind:this="{items[i]}">
 				{option[label]} <small>{option[group]}</small>
 			</li>
 			{/each}
 			{:else if filtered[0]}
 			{#each filtered as option, i}
-			<li class:highlight="{active == i}" on:click="{() => select(option)}" on:mouseover="{() => active = i}" bind:this="{items[i]}">
+			<li class:highlight="{active == i}" onclick={() => select(option)} onmouseover={() => (active = i)} bind:this="{items[i]}">
 				{option[label]}
 			</li>
 			{/each}

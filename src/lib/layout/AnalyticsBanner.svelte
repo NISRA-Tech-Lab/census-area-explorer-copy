@@ -225,7 +225,6 @@
     margin:8px 0;
   }
   .wrapper,.clearfix{  
-    *zoom:1;
   }
   .wrapper:before,.clearfix:before,.wrapper:after,.clearfix:after{
     content:"";
