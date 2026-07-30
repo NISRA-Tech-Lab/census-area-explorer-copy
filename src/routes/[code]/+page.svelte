@@ -319,9 +319,9 @@
 								!comp_none &
 								!comp_2011}
 							onclick={() => {
-								comp_none = true;
+								comp_none = false;
 								comp_2011 = false;
-								comp_ni = false;
+								comp_ni = true;
 							}}
 							>NI 2021</button>
 					{/if}
@@ -329,13 +329,15 @@
 						{#if topics_available}
 						<button
 						class="btn"
-						class:btn-active={comp_2011 & !comp_none & !comp_ni}
+						class:btn-active={comp_2011 && !comp_none && !comp_ni}
 						onclick={() => {
-							comp_none = true;
-							comp_2011 = false;
+							comp_none = false;
+							comp_2011 = true;
 							comp_ni = false;
 						}}
-						>Same area 2011</button>
+						>
+							Same area 2011
+						</button>
 						{:else}
 						<button
 						class="btn"
@@ -422,9 +424,11 @@
 						<button
 							class="btn"
 							style="width: 33%"
-							alt="Return to the landing page"
-							onclick={() => (window.location.href = base)}
-							>Menu </button>
+							title="Return to the landing page"
+							onclick={() => goto(`${base}/`)}
+						>
+							Menu
+						</button>
 						<button
 							class="btn"
 							style="width: 30%"
@@ -633,7 +637,7 @@
 				</div>
 				<!-- a19e9e -->
 		<div class="grid mt" bind:clientWidth={w}>
-			<div style="grid-column: span {cols};">
+			<div style="grid-column: 1 / -1;">
 				<h3>
 					<!-- Explore <span style="color: #93328E">{place.name}</span> -->
 					{#if place.type != "ni"}
@@ -645,13 +649,10 @@
 
 				</h3>
 			</div>
-			<div
+		<div
 				id="map"
-				style="padding-right: 45px; grid-column: span {cols == 2
-					? 2
-					: cols && cols > 2
-					? cols - 1
-					: 1};  ">
+				style="padding-right: 45px; grid-column: 1 / span 2;"
+			>
 				<Map
 					bind:map
 					location={{ bounds: place.bounds }}
@@ -2866,6 +2867,7 @@
 		.highlited {
 			color: red !important;
 			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
 		}
 	}
 

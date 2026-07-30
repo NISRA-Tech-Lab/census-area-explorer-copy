@@ -12,9 +12,6 @@ const config = {
 			assets: 'build',
 			fallback: '404.html'
 		}),
-		prerender: {
-				entries: []
-		},
 		paths: {
 			base: production ? '/area-explorer-2021' : '',
 			relative: false

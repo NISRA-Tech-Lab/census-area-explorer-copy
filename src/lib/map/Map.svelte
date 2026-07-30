@@ -1,5 +1,5 @@
 <script>
-	import { onMount, setContext } from "svelte";
+	import { onMount, setContext, tick } from "svelte";
 	import mapboxgl from "mapbox-gl";
 
 	const { Map, NavigationControl, GeolocateControl } = mapboxgl;
@@ -46,7 +46,7 @@
 		link.rel = "stylesheet";
 		link.href = "https://unpkg.com/mapbox-gl@1.13.0/dist/mapbox-gl.css";
 
-		link.onload = () => {
+		link.onload = async () => {
 			map = new Map({
 				container,
 				style: style,
@@ -66,6 +66,12 @@
 			if (geolocate) {
 				map.addControl(new GeolocateControl());
 			}
+
+			await tick();
+
+			requestAnimationFrame(() => {
+				map.resize();
+			});
 
 			// Get initial zoom level
 			map.on("load", () => {
