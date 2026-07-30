@@ -23,7 +23,6 @@
 	import GroupChart from "$lib/chart/GroupChart.svelte";
 	import BarChart from "$lib/chart/BarChart.svelte";
 	import ProfileChart from "$lib/chart/ProfileChart.svelte";
-	import AnalyticsBanner from "$lib/layout/AnalyticsBanner.svelte";
 	import ScrollToTop from '$lib/ui/scroll.svelte';
 
 	export let data;
