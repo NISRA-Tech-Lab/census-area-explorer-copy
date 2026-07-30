@@ -66,7 +66,7 @@
         <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-top: 0;">Corporate</h3>
         <ul class="footer-list">
           <li><a href="https://www.nisra.gov.uk/">NISRA Website</a></li>
-          <li><a href="https://www.nisra.gov.uk/statistics/about-nisra/careers">Careers</a></li>
+          <li><a href="https://www.nisra.gov.uk/about-us/careers">Careers</a></li>
           <li><a href="https://www.nisra.gov.uk/contact">Contact</a></li>
         </ul>
       </div>
