@@ -120,6 +120,17 @@
                 class="img" />
             </a>
           </li>
+          <li>
+            <a href="https://www.instagram.com/nisra.gov.uk/"
+            aria-label="NISRA on Instagram"
+            >
+              <img
+                src={asset('/img/logo/instagram-brands-solid-full.svg')}
+                alt=""
+                title="Instagram"
+                class="img" />
+            </a>
+          </li>
         </ul>
       </div>
 
