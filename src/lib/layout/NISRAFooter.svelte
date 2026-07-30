@@ -76,28 +76,48 @@
         <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-top: 0;">Follow NISRA</h3>
         <ul class="footer-social">
           <li>
-            <a href="https://www.facebook.com/nisra.gov.uk">
+            <a href="https://www.facebook.com/nisra.gov.uk"
+            aria-label="NISRA on Facebook"
+            >
               <img
                 src={asset('/img/logo/facebook-brands-solid-full.svg')}
+                alt=""
                 title="Facebook"
-                role="img"
                 class="img"
               />
             </a>
           </li>
           <li>
-            <a href="https://x.com/NISRA/">
-              <img src={asset('/img/logo/x-twitter-brands-solid-full.svg')} title="Twitter/X" role="img" class="img" />
+            <a href="https://x.com/NISRA/"
+            aria-label="NISRA on X"
+            >
+              <img
+                src={asset('/img/logo/x-twitter-brands-solid-full.svg')}
+                alt=""
+                title="Twitter/X"
+                class="img" />
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com/user/nisrastats">
-              <img src={asset('/img/logo/youtube-brands-solid-full.svg')} title="YouTube" role="img" class="img" />
+            <a href="https://www.youtube.com/user/nisrastats"
+            aria-label="NISRA on YouTube"
+            >
+              <img
+                src={asset('/img/logo/youtube-brands-solid-full.svg')}
+                alt=""
+                title="YouTube"
+                class="img" />
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/company/northern-ireland-statistics-and-research-agency/">
-              <img src={asset('/img/logo/linkedin-in-brands-solid-full.svg')} title="LinkedIn" role="img" class="img" />
+            <a href="https://www.linkedin.com/company/northern-ireland-statistics-and-research-agency/"
+            aria-label="NISRA on LinkedIn"
+            >
+              <img
+                src={asset('/img/logo/linkedin-in-brands-solid-full.svg')}
+                alt=""
+                title="LinkedIn"
+                class="img" />
             </a>
           </li>
         </ul>

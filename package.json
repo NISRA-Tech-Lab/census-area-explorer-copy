@@ -6,7 +6,8 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d build -t true"
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "deploy": "gh-pages -d build -t"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.10",
@@ -17,6 +18,7 @@
     "mapbox-gl": "1.x",
     "parse-color": "^1.0.0",
     "svelte": "^5.56.4",
+    "svelte-check": "^4.7.3",
     "svelte-preprocess": "^6.0.2",
     "vite": "^8.1.4"
   },

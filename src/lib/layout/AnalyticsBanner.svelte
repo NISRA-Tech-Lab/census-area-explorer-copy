@@ -220,11 +220,8 @@
   .cookies-banner a{
     text-decoration:none;
   }
-  .cookies-banner p,.cookies-banner .markdown li p:nth-of-type(2),.markdown li .cookies-banner p:nth-of-type(2),.cookies-banner .section__content--markdown li p:nth-of-type(2),.section__content--markdown li .cookies-banner p:nth-of-type(2),.cookies-banner .section__content--static-markdown li p:nth-of-type(2),.section__content--static-markdown li .cookies-banner p:nth-of-type(2){
-    padding:0;
-    margin:8px 0;
-  }
-  .wrapper,.clearfix{  
+  .cookies-banner p {
+	  padding: 0;
   }
   .wrapper:before,.clearfix:before,.wrapper:after,.clearfix:after{
     content:"";
@@ -261,6 +258,7 @@
     border:0;
     text-align:center;
     -webkit-appearance:none;
+    appearance: none;
     transition:background-color .25s ease-out;
     text-decoration:none;
     line-height:24px;
