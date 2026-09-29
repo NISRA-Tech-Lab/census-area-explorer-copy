@@ -1,107 +1,140 @@
 <script>
-    import { onMount } from "svelte"
-    import { initCookieConsent } from "$lib/cookies";
+  import { onMount } from "svelte";
 
-    export let analyticsId; // Required. Google analytics/tag manager ID
-    export let analyticsProps = {}; // Optional props to describe the content
-    export let usageCookies = false; // True if usage cookies are allowed (to be read from parent component)
-    export let page = null; // Pass Svelte Kit's $page to track navigation in multi-page apps
+  const CONSENT_STORAGE_KEY = "nisra_consent_v2";
+  const CONSENT_VERSION = 1;
+  const CONSENT_MAX_AGE_DAYS = 365;
 
-    let live; // Don't run analytics unless page is live on ONS site (re-set in the onMount function)
+  let showBanner = false;
 
-    let showBanner = false;
-    let showConfirm = false;
-    let message = "";
-    let location = null; // For keeping track of navigation multi-page apps
+  function acceptedConsent() {
+    return {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      functionality_storage: "granted",
+      security_storage: "granted"
+    };
+  }
 
-    function hasCookiesPreferencesSet() {
-        return -1 < document.cookie.indexOf("cookies_preferences_set=true")
-    }
+  function deniedConsent() {
+    return {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      functionality_storage: "granted",
+      security_storage: "granted"
+    };
+  }
 
-    // Check if usage cookies are allowed (for Google Analytics + Hotjar)
-    function getUsageCookieValue() {
-        var cookiesPolicyCookie = document.cookie.match(new RegExp("(^|;) ?cookies_policy=([^;]*)(;|$)"));
-        if (cookiesPolicyCookie) {
-        var decodedCookie = decodeURIComponent(cookiesPolicyCookie[2]);
-        var cookieValue = JSON.parse(decodedCookie);
-        return cookieValue.usage;
-        }
-        return false;
-    }
+  function updateConsent(consentState) {
+    window.gtag(
+      "consent",
+      "update",
+      consentState
+    );
+  }
 
-    function applyConsentDecision(option) {
-      if (option === "all") {
-        setCookie("all");
-      } else {
-        setCookie("reject");
-      }
-    }
-
-    // Set site cookie with 'all' or 'essential' cookies
-    function setCookie(option) {
-        let oneYearInSeconds = 60 * 60 * 24 * 365;
-        let cookiesDomain = window.location.hostname;
-        let cookiesPreference = !0;
-        let encodedCookiesPolicy = `%7B%22essential%22%3Atrue%2C%22usage%22%3A${option == 'all' ? 'true' : 'false'}%7D`;
-        let cookiesPath = "/";
-        
-        document.cookie = `cookies_preferences_set=${cookiesPreference};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
-        document.cookie = `cookies_policy=${encodedCookiesPolicy};max-age=${oneYearInSeconds};domain=${cookiesDomain};path=${cookiesPath};`;
-
-        message = option == "all" ? "all" : "only essential";
-        if (option == "all") usageCookies = true;
-        showConfirm = true;
-
-        if (option == "all") initAnalytics();
-    }
-
-    // Initialise analytics and 'window.dataLayer' (which can be used throughout the app)
-    function initAnalytics() {
-        console.log('initialising analytics');
-        window.dataLayer = [{
-        "analyticsOptOut": false,
-        "gtm.whitelist": ["google","hjtc","lcl"],
-        "gtm.blacklist": ["customScripts","sp","adm","awct","k","d","j"],
-        ...analyticsProps
-        }];
-        if (page) location =  $page.url.hostname + $page.url.pathname + $page.url.searchParams;
-
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.head,
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.appendChild(j);
-            })(window,document,'script','dataLayer',analyticsId);
+  function saveChoice(choice) {
+    const record = {
+      choice,
+      version: CONSENT_VERSION,
+      timestamp: new Date().toISOString()
     };
 
-    // This code is only relevant for multi-page Svelte Kit apps. It sends an analytics event when the URL changes
-    $: if (live && usageCookies && page) {
-        let newlocation = $page.url.hostname + $page.url.pathname + $page.url.searchParams;
-        if (newlocation !== location) {
-        location = newlocation;
+    try {
+      localStorage.setItem(
+        CONSENT_STORAGE_KEY,
+        JSON.stringify(record)
+      );
+    } catch (error) {
+      // Consent still applies to the current page if storage is unavailable.
+    }
+  }
 
-        window.dataLayer.push({
-            event: "pageView",
-            page_path : $page.url.pathname,
-            page_location: location,
-            page_title: document ? document.title : null
-        });
-        console.log('navigated to ' + location);
-        }
+  function getSavedChoice() {
+    try {
+      const stored = localStorage.getItem(
+        CONSENT_STORAGE_KEY
+      );
+
+      if (!stored) {
+        return null;
+      }
+
+      const record = JSON.parse(stored);
+      const timestamp = Date.parse(
+        record.timestamp
+      );
+
+      const maximumAge =
+        CONSENT_MAX_AGE_DAYS *
+        24 *
+        60 *
+        60 *
+        1000;
+
+      const age =
+        Date.now() - timestamp;
+
+      const validChoice =
+        record.choice === "accepted" ||
+        record.choice === "rejected";
+
+      const validVersion =
+        record.version === CONSENT_VERSION;
+
+      const validTimestamp =
+        Number.isFinite(timestamp) &&
+        age >= 0 &&
+        age <= maximumAge;
+
+      if (
+        !validChoice ||
+        !validVersion ||
+        !validTimestamp
+      ) {
+        localStorage.removeItem(
+          CONSENT_STORAGE_KEY
+        );
+
+        return null;
+      }
+
+      return record.choice;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function applyConsentDecision(choice) {
+    if (choice === "accepted") {
+      updateConsent(
+        acceptedConsent()
+      );
+    } else {
+      updateConsent(
+        deniedConsent()
+      );
     }
 
-    onMount(() => {
-        live = true;
-        //live = window.location.hostname == "www.ons.gov.uk" || window.location.hostname == "cy.ons.gov.uk";
-        showBanner = !hasCookiesPreferencesSet();
-        usageCookies = getUsageCookieValue();
-        if (usageCookies && live) initAnalytics();
+    saveChoice(choice);
 
-        initCookieConsent({
-            bannerId: 'cookie-banner',
-            gtmId: 'GTM-WKK8ZWP',
-            cookieDomain: window.location.hostname
-      });
+    window.dataLayer = window.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "nisra_consent_updated",
+      consent_choice: choice
     });
+
+    showBanner = false;
+  }
+
+  onMount(() => {
+    showBanner = !getSavedChoice();
+  });
 </script>
 
 {#if showBanner}
@@ -110,7 +143,6 @@
     id="global-cookie-message"
     class="cookies-banner clearfix"
     aria-label="cookie banner">
-    {#if !showConfirm}
     <div class="cookies-banner__wrapper wrapper">
       <div>
         <div class="cookies-banner__message font-size--18">
@@ -129,7 +161,7 @@
               class="btn btn--full-width btn--primary btn--focus margin-right--2 font-weight-700 font-size--17 text-wrap"
               data-gtm-accept-cookies="true" type="submit"
               on:click|preventDefault={() => {
-                applyConsentDecision("all");
+                applyConsentDecision("accepted");
               }}>
               Accept cookies
             </button>
@@ -139,7 +171,7 @@
               class="btn btn--full-width btn--secondary btn--focus font-weight-700 font-size--17 text-wrap"
               data-gtm-accept-cookies="true"
               on:click|preventDefault={() => {
-                applyConsentDecision("reject");
+                applyConsentDecision("rejected");
               }}>
               Reject cookies
               </button>
@@ -147,7 +179,6 @@
         </div>
       </div>
     </div>
-    {/if}
   </form>
 </section>
 {/if}
