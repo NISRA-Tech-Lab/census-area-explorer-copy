@@ -252,7 +252,7 @@
 		text-decoration: none;
 		display: block;
 		padding: 0;
-		border: 2px solid #00205b !important;
+		border: 2px solid #732777 !important;
 	}
 	a span {
 		display: inline-block;
@@ -337,7 +337,7 @@
 	}
 	.button {
 		color: #fff;
-		background-color: #00205b;
+		background-color: #732777;
 		background-repeat: no-repeat;
 		background-position: center;
 		float: right;

@@ -239,6 +239,11 @@
   text-underline-offset: 3px;
 }
 
+.footer-list a:hover {
+	text-decoration-thickness: 3px;
+	text-decoration-color: currentColor;
+}
+
 /* ===========================
    Social Icons
    =========================== */
@@ -282,6 +287,11 @@
   color: #fff;
   font-size: 18px;
   text-decoration: underline;
+}
+
+.footer-links a:hover {
+	text-decoration-thickness: 3px;
+	text-decoration-color: currentColor;
 }
 
 /* Tablets — allow wrapping if needed */

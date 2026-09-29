@@ -24,7 +24,8 @@
 	import BarChart from "$lib/chart/BarChart.svelte";
 	import ProfileChart from "$lib/chart/ProfileChart.svelte";
 	import ScrollToTop from '$lib/ui/scroll.svelte';
-
+	import IButton from "$lib/ui/IButton.svelte";
+	
 	export let data;
 
 	$: ({ search_data, place, ni } = data);
@@ -284,13 +285,13 @@
 						{place.name}
 					{/if}
 				</span><br />
-				<span class="text-big title">{place.name}</span>
+				<span class="geography-title">{place.name}</span>
 				<div class="text-bold" style="font-size: 0.85em;">
 					Click for: 
 		
 					{#if place.type == "ni"}
 					<button
-						class="btn"
+						class="action-button"
 						class:btn-active={!comp_2011}
 						onclick={() => {
 							comp_none = true;
@@ -301,7 +302,7 @@
 					>
 					{:else}
 					<button
-						class="btn"
+						class="action-button"
 						class:btn-active={comp_none}
 						onclick={() => {
 							comp_none = true;
@@ -313,7 +314,7 @@
 					{/if}
 					{#if place.type != "ni"}
 						<button
-							class="btn"
+							class="action-button"
 							class:btn-active={comp_ni &
 								!comp_none &
 								!comp_2011}
@@ -327,7 +328,7 @@
 					
 						{#if topics_available}
 						<button
-						class="btn"
+						class="action-button"
 						class:btn-active={comp_2011 && !comp_none && !comp_ni}
 						onclick={() => {
 							comp_none = false;
@@ -339,7 +340,7 @@
 						</button>
 						{:else}
 						<button
-						class="btn"
+						class="action-button"
 						class:btn-active={comp_2011 & !comp_none & !comp_ni}
 						onclick={() => {
 							comp_none = true;
@@ -355,8 +356,7 @@
 			
 			<div>
 				<div
-					style="width: 350px; padding-top: 5px;"
-					class:float-right={cols > 1}
+					style="width: 350px; padding-top: 5px; margin-left: auto;"
 				>
 					<b>Search for your area:</b>
 					<Select
@@ -415,13 +415,13 @@
  -->
 					<div width="100%">
 						<button
-							class="btn"
+							class="action-button"
 							style="width: 33%"
 							title="Click to print this page to pdf or printer"
 							onclick={() => window.print()}
 							>Print / PDF </button>
 						<button
-							class="btn"
+							class="action-button"
 							style="width: 33%"
 							title="Return to the landing page"
 							onclick={() => goto(`${base}/`)}
@@ -429,7 +429,7 @@
 							Menu
 						</button>
 						<button
-							class="btn"
+							class="action-button"
 							style="width: 30%"
 							type="share"
 							alt="Share this page">Share </button>
@@ -496,9 +496,7 @@
 					aria-controls="pop-info"
 				>
 					<div class="blocktitle" style="margin: 0; width: 100%">
-						Population <span style="color: gray; font-size: 14pt;"
-							>{@html " &#x24D8; "}
-						</span>
+						Population <IButton />
 					</div>
 				</div>
 				<div class="collapse" id="pop-info">
@@ -572,9 +570,7 @@
 					aria-controls="households-info"
 				>
 					<div class="blocktitle" style="margin: 0; width: 100%">
-						Households<span style="color: gray; font-size: 14pt;"
-							>{@html " &#x24D8; "}</span
-						>
+						Households <IButton />
 					</div>
 				</div>
 				<div class="collapse" id="households-info">
@@ -820,9 +816,7 @@
 								aria-controls="location-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Location<span style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Location <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="location-info">
@@ -859,9 +853,7 @@
 								aria-controls="Area-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Area <span style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Area <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="Area-info">
@@ -884,9 +876,7 @@
 								aria-expanded="false"
 								aria-controls="popden-info">
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Population density<span style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Population density <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="popden-info">
@@ -940,10 +930,7 @@
 								aria-controls="broadagebands-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Broad age bands (years) <span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Broad age bands (years) <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="broadagebands-info">
@@ -1007,7 +994,8 @@
 			
 			 <div class = "div-grey-box">
 				<div class="row" style="display: flex; cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#hhsize-info" aria-expanded="false" aria-controls="hhsize-info">
-					<div class="blocktitle" style="margin: 0; width: 100%">Household size<span style="color: gray; font-size: 14pt;">{@html ' &#x24D8; '}</span></div>
+					<div class="blocktitle" style="margin: 0; width: 100%">Household size <IButton /> 
+					</div>
 				</div>
 				<div class="collapse" id="hhsize-info">
 					<div class="card card-body">
@@ -1063,10 +1051,7 @@
 								aria-controls="cob-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Country of birth<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Country of birth <IButton />
 								</div>
 								
 							</div>
@@ -1102,10 +1087,7 @@
 								aria-controls="passport-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Passport(s) held<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Passport(s) held <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="passport-info">
@@ -1143,10 +1125,7 @@
 									class="blocktitle"
 									style="font-size: 1.02em; margin: 0; width: 100%"
 								>
-									National identity (person based)<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									National identity (person based) <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="natid-info">
@@ -1200,10 +1179,7 @@
 								aria-controls="mainlang-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Main language<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Main language <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="mainlang-info">
@@ -1240,10 +1216,7 @@
 								aria-controls="irish-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Knowledge of Irish<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Knowledge of Irish <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="irish-info">
@@ -1281,10 +1254,7 @@
 								aria-controls="ulster-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Knowledge of Ulster-Scots<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Knowledge of Ulster-Scots <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="ulster-info">
@@ -1342,9 +1312,7 @@
 								aria-controls="rel-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Religion<span style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Religion <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="rel-info">
@@ -1372,7 +1340,8 @@
 									</div>
 						 <div class = "div-grey-box">
 				<div class="row" style="display: flex; cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#relbup-info" aria-expanded="false" aria-controls="relbup-info">
-					<div class="blocktitle" style="margin: 0; width: 100%">Religion or religion brought up in<span style="color: gray; font-size: 14pt;">{@html ' &#x24D8; '}</span></div>
+					<div class="blocktitle" style="margin: 0; width: 100%">Religion or religion brought up in <IButton />
+					</div>
 				</div>
 				<div class="collapse" id="relbup-info">
 					<div class="card card-body">
@@ -1399,10 +1368,7 @@
 								aria-controls="ethnic-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Ethnic group<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Ethnic group <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="ethnic-info">
@@ -1457,10 +1423,7 @@
 											class="blocktitle"
 											style="margin: 0; width: 100%"
 										>
-											General health<span
-												style="color: gray; font-size: 14pt;"
-												>{@html " &#x24D8; "}</span
-											><br>
+											General health <IButton /> <br>
 										</div>
 									</div>
 									<div class="collapse" id="gen-health-info">
@@ -1502,10 +1465,7 @@
 											class="blocktitle"
 											style="font-size: 0.87em; margin: 0; width: 100%"
 										>
-											Long-term health problem or disability<span
-												style="color: gray; font-size: 14pt;"
-												>{@html " &#x24D8; "}</span
-											>
+											Long-term health problem or disability <IButton />
 										</div>
 									</div>
 									<div class="collapse" id="lti-info">
@@ -1546,10 +1506,7 @@
 											class="blocktitle"
 											style="font-size: 1.02em; margin: 0; width: 100%"
 										>
-											Long-term health conditions<span
-												style="color: gray; font-size: 14pt;"
-												>{@html " &#x24D8; "}</span
-											><br>
+											Long-term health conditions <IButton /> <br>
 										</div>
 									</div>
 									<div class="collapse" id="lt-cond-info">
@@ -1591,10 +1548,7 @@
 											class="blocktitle"
 											style="font-size: 1.02em; margin: 0; width: 100%"
 										>
-											Unpaid care<span
-												style="color: gray; font-size: 14pt;"
-												>{@html " &#x24D8; "}</span
-											>
+											Unpaid care <IButton />
 										</div>
 									</div>
 									<div class="collapse" id="unpaid-info">
@@ -1659,10 +1613,7 @@
 								aria-controls="acc-type-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Accommodation type<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Accommodation type <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="acc-type-info">
@@ -1695,10 +1646,7 @@
 								aria-controls="adapt-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Household adaptations<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Household adaptations <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="adapt-info">
@@ -1735,10 +1683,7 @@
 								aria-controls="heat-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Central heating<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Central heating <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="heat-info">
@@ -1775,10 +1720,7 @@
 								aria-controls="renew-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Renewable energy systems<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Renewable energy systems <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="renew-info">
@@ -1821,10 +1763,7 @@
 								aria-controls="tenure-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Household tenure<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Household tenure <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="tenure-info">
@@ -1861,10 +1800,7 @@
 								aria-controls="car-info"
 							>
 								<div class="blocktitle" style="margin: 0; width: 100%">
-									Car or van availability<span
-										style="color: gray; font-size: 14pt;"
-										>{@html " &#x24D8; "}</span
-									>
+									Car or van availability <IButton />
 								</div>
 							</div>
 							<div class="collapse" id="car-info">
@@ -1922,10 +1858,7 @@
 									aria-controls="dep-child-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Number of dependent children<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Number of dependent children <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="dep-child-info">
@@ -1961,10 +1894,7 @@
 									aria-controls="hh-comp-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Household composition<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Household composition <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="hh-comp-info">
@@ -2025,10 +1955,7 @@
 							aria-controls="marital-info"
 						>
 							<div class="blocktitle" style="font-size: 0.95em;margin: 0; width: 100%"> <!-- font-size: 1.02em -->
-								Marital and civil partnership status<span
-									style="color: gray; font-size: 14pt;"
-									>{@html " &#x24D8; "}</span
-								>
+								Marital and civil partnership status <IButton />
 							</div>
 						</div>
 						<div class="collapse" id="marital-info">
@@ -2093,10 +2020,7 @@
 									aria-controls="sexual-orientation-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Sexual orientation<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Sexual orientation <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="sexual-orientation-info">
@@ -2162,10 +2086,7 @@
 									aria-controls="quals-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Highest level of qualifications<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Highest level of qualifications <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="quals-info">
@@ -2217,10 +2138,7 @@
 									aria-controls="econ-act-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Economic activity<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Economic activity <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="econ-act-info">
@@ -2256,10 +2174,7 @@
 									aria-controls="hours-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Hours worked per week<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Hours worked per week <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="hours-info">
@@ -2295,10 +2210,7 @@
 									aria-controls="industry-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Industry of employment<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Industry of employment <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="industry-info">
@@ -2334,10 +2246,7 @@
 									aria-controls="occupation-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Occupation<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Occupation <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="occupation-info">
@@ -2393,10 +2302,7 @@
 									aria-controls="method-travel-work-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Method of travel to work<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Method of travel to work <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="method-travel-work-info">
@@ -2434,10 +2340,7 @@
 									aria-controls="method-travel-study-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Method of travel to study<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Method of travel to study <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="method-travel-study-info">
@@ -2481,10 +2384,7 @@
 									aria-controls="distance-travel-work-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Distance to place of work<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Distance to place of work <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="distance-travel-work-info">
@@ -2521,10 +2421,7 @@
 									aria-controls="distance-travel-study-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Distance to place of study<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Distance to place of study <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="distance-travel-study-info">
@@ -2579,10 +2476,7 @@
 									aria-controls="address-1yr-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Address one year ago<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Address one year ago <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="address-1yr-info">
@@ -2618,10 +2512,7 @@
 									aria-controls="year-arr-info"
 								>
 									<div class="blocktitle" style="margin: 0; width: 100%">
-										Year of arrival to live in NI<span
-											style="color: gray; font-size: 14pt;"
-											>{@html " &#x24D8; "}</span
-										>
+										Year of arrival to live in NI <IButton />
 									</div>
 								</div>
 								<div class="collapse" id="year-arr-info">
@@ -2691,18 +2582,20 @@
 		background-color: #f5f5f6;
 		padding: 16px 16px;
 	}
-	.btn {
-		padding: 2px 4px;
-		margin: 0.2;
-		border: 2px solid #00205b;
-		cursor: pointer;
-		color: #00205b;
-		background-color: lightgrey;
-	}
+	
 	.btn-active {
 		color: white;
 		background-color: #00205b;
 	}
+	.geography-title {
+		display: block;
+		margin-top: 12px;
+		margin-bottom: 8px;
+		font-size: 1.8em;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
  	.increase {
 		color: darkgreen;
 	}
@@ -2734,9 +2627,6 @@
 	}
 	.text-right {
 		text-align: right;
-	}
-	.float-right {
-		float: right;
 	}
 	.inline {
 		display: inline-block;
