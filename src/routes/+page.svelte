@@ -109,11 +109,11 @@
 
 	h2 {
 		margin: 0 0 20px;
-		color: #732777;
+		color: #00205b;
 		font-size: 1.5em;
 		line-height: 1.2;
 	}
-
+	
 	.council-heading {
 		margin-top: 24px;
 	}
