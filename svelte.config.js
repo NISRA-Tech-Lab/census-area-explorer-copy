@@ -13,7 +13,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: production ? '/area-explorer-2021' : '',
+			base: production ? '/census-area-explorer-copy' : '',
 			relative: false
 		}
 	}

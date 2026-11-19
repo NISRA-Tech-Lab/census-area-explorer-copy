@@ -21,7 +21,7 @@ export const app_inputs = {
 	//search_data: '/data_jsons_dz/places_dz.csv',
 	app_json_data: 'https://datavis.nisra.gov.uk/census/aex-hifg11/',
 	//app_json_data: '/data_jsons_dz/',
-	base: 'https://explore.nisra.gov.uk/area-explorer-2021/'
+	base: 'https://NISRA-Tech-Lab.github.io/census-area-explorer-copy/'
 };
 
 export const geog_types = {

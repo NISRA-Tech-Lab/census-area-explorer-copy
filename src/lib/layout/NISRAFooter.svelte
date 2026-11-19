@@ -13,7 +13,7 @@
 <div style="margin-left:16px; padding-right:16px;">
 	<h3 style="margin-bottom:10px; line-height: 1.78;">Download</h3>
 	<li style="margin: 0px; display: block; line-height: 20px; padding-bottom: 5px">
-		 <a href="https://www.nisra.gov.uk/publications/census-area-explorer-2021-and-2011-data" class="link"><strong>Download</strong> Census 2011 and 2021 data from this app</a>
+		 <a href="https://www.nisra.gov.uk/publications/census-census-area-explorer-copy-and-2011-data" class="link"><strong>Download</strong> Census 2011 and 2021 data from this app</a>
 	</li>
   </div>
   
@@ -55,7 +55,7 @@
       <div class="footer-col">
         <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-top: 0;">Data Tools</h3>
         <ul class="footer-list">
-          <li><a href="https://explore.nisra.gov.uk/local-stats/">Local Statistics Explorer</a></li>
+          <li><a href="https://NISRA-Tech-Lab.github.io/local-stats/">Local Statistics Explorer</a></li>
           <li><a href="https://data.nisra.gov.uk">Data Portal</a></li>
           <li><a href="https://build.nisra.gov.uk/en/">Census Flexible Table Builder</a></li>
         </ul>
