@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+docs
+/.svelte-kit
+/package
+/build
+/data_jsons
+/data_jsons_dz
+data_jsons.zip
+*.zip
